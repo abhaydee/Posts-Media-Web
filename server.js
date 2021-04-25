@@ -6,6 +6,10 @@ const postModel = require("./src/models/Posts");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const userModal = require("./src/models/User");
+const {
+  registerValidation,
+  loginValidation,
+} = require("./src/utils/validation");
 require("dotenv").config;
 const typeDefs = gql`
   type Post {
@@ -53,7 +57,16 @@ const resolvers = {
       info
     ) {
       password = await bcrypt.hash(password, 12);
-      const oldUser = userModal.findOne({ username });
+      const { errors, valid } = registerValidation(
+        username,
+        email,
+        password,
+        confirmPassword
+      );
+      if (!valid) {
+        throw new UserInputError("errors", { errors: errors });
+      }
+      const oldUser = await userModal.findOne({ username });
       if (!oldUser) {
         const newUser = new userModal({
           email,
@@ -79,7 +92,12 @@ const resolvers = {
         };
       } else {
         throw new UserInputError(
-          "Username is already token, create a new user"
+          "Username is already token, create a new user",
+          {
+            errors: {
+              username: "this username has already been taken",
+            },
+          }
         );
       }
     },
