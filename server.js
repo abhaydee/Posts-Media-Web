@@ -11,6 +11,18 @@ const {
   loginValidation,
 } = require("./src/utils/validation");
 require("dotenv").config;
+const generateToken = async (user) => {
+  console.log("sending the user", user);
+  return await jwt.sign(
+    {
+      username: user.username,
+      id: user.id,
+      email: user.email,
+    },
+    secretKey,
+    { expiresIn: "1h" }
+  );
+};
 const typeDefs = gql`
   type Post {
     id: ID!
@@ -26,6 +38,10 @@ const typeDefs = gql`
     confirmPassword: String!
     email: String!
   }
+  input LoginInput {
+    email: String!
+    password: String!
+  }
   type User {
     id: ID!
     email: String!
@@ -35,6 +51,7 @@ const typeDefs = gql`
   }
   type Mutation {
     register(input: RegisterInput): User
+    login(input: LoginInput): User
   }
 `;
 let users = [];
@@ -100,6 +117,34 @@ const resolvers = {
           }
         );
       }
+    },
+    login: async function (
+      parent,
+      { input: { email, password } },
+      context,
+      info
+    ) {
+      console.log("args", email, password);
+      const { errors, valid } = loginValidation(email, password);
+      if (!valid) {
+        throw new UserInputError("errors", { errors: errors });
+      }
+      const userdata = await userModal.findOne({ email });
+      if (!userdata) {
+        throw new UserInputError("user not found");
+      }
+      const match = bcrypt.compare(password, userModal.password);
+      if (!match) {
+        errors.general = "wrong credentials";
+        throw new UserInputError("Wrong credentials", { errors: errors });
+      }
+      const token = generateToken(userdata);
+      console.log("the token", token);
+      return {
+        ...userdata._doc,
+        id: userdata._id,
+        token,
+      };
     },
   },
 };
