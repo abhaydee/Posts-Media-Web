@@ -31,6 +31,7 @@ const typeDefs = gql`
   }
   type Query {
     getPosts: [Post]
+    getPost(postId: ID!): Post!
   }
   input RegisterInput {
     username: String!
@@ -52,6 +53,8 @@ const typeDefs = gql`
   type Mutation {
     register(input: RegisterInput): User
     login(input: LoginInput): User
+    createPost(body: String!): Post
+    deletePost(postId: ID!): String!
   }
 `;
 let users = [];
@@ -61,6 +64,19 @@ const resolvers = {
       try {
         const posts = await postModel.find();
         return posts;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+    getPost: async function (_, { postId }) {
+      try {
+        const post = await postModel.findById(postId);
+        if (post) {
+          console.log("the post", postId);
+          return post;
+        } else {
+          return "Post not found";
+        }
       } catch (error) {
         throw new Error(error);
       }
