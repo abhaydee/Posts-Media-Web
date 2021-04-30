@@ -191,11 +191,14 @@ const resolvers = {
         const post = await Posts.find({ postId });
         if (authResult.username === post.username) {
           await post.delete();
+          return "Post deleted successfully";
+        } else {
+          throw new AuthenticationError(
+            "Your are not the owner of this post,hence cannot delete it"
+          );
         }
       } catch (err) {
-        throw new AuthenticationError(
-          "Your are not the owner of this post,hence cannot delete it"
-        );
+        throw new Error(err);
       }
     },
   },
