@@ -71,6 +71,7 @@ const resolvers = {
     getPosts: async function () {
       try {
         const posts = await postModel.find().sort({ createdAt: -1 });
+        console.log("the posts", posts);
         return posts;
       } catch (error) {
         throw new Error(error);
@@ -188,7 +189,12 @@ const resolvers = {
     deletePost: async function (parent, { postId }, context) {
       try {
         const authResult = checkAuth(context);
-        const post = await Posts.find({ postId });
+        const post = await Posts.findById(postId);
+        console.log(
+          "--authresult-username && post-username",
+          authResult.username,
+          post.username
+        );
         if (authResult.username === post.username) {
           await post.delete();
           return "Post deleted successfully";
