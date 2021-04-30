@@ -1,5 +1,10 @@
 const express = require("express");
-const { ApolloServer, gql, UserInputError } = require("apollo-server-express");
+const {
+  ApolloServer,
+  gql,
+  UserInputError,
+  AuthenticationError,
+} = require("apollo-server-express");
 const mongoose = require("mongoose");
 const { MONGODB, secretKey } = require("./config");
 const postModel = require("./src/models/Posts");
@@ -10,6 +15,8 @@ const {
   registerValidation,
   loginValidation,
 } = require("./src/utils/validation");
+const Posts = require("./src/models/Posts");
+const checkAuth = require("./src/utils/authcheck");
 require("dotenv").config;
 const generateToken = async (user) => {
   console.log("sending the user", user);
@@ -28,6 +35,7 @@ const typeDefs = gql`
     id: ID!
     body: String!
     createdAt: String!
+    username: String!
   }
   type Query {
     getPosts: [Post]
@@ -62,7 +70,7 @@ const resolvers = {
   Query: {
     getPosts: async function () {
       try {
-        const posts = await postModel.find();
+        const posts = await postModel.find().sort({ createdAt: -1 });
         return posts;
       } catch (error) {
         throw new Error(error);
@@ -89,16 +97,17 @@ const resolvers = {
       context,
       info
     ) {
-      password = await bcrypt.hash(password, 12);
       const { errors, valid } = registerValidation(
         username,
         email,
         password,
         confirmPassword
       );
+      console.log("the fourth console", email);
       if (!valid) {
         throw new UserInputError("errors", { errors: errors });
       }
+      password = await bcrypt.hash(password, 12);
       const oldUser = await userModal.findOne({ username });
       if (!oldUser) {
         const newUser = new userModal({
@@ -162,11 +171,39 @@ const resolvers = {
         token,
       };
     },
+    createPost: async function (parent, { body }, context) {
+      console.log("the body", body);
+      const authResult = checkAuth(context);
+      const newPost = new Posts({
+        body,
+        user: authResult.id,
+        username: authResult.username,
+        createdAt: new Date().toISOString(),
+      });
+      const post = newPost.save();
+      console.log("---the authresults---", authResult);
+      console.log("---post---", post);
+      return post;
+    },
+    deletePost: async function (parent, { postId }, context) {
+      try {
+        const authResult = checkAuth(context);
+        const post = await Posts.find({ postId });
+        if (authResult.username === post.username) {
+          await post.delete();
+        }
+      } catch (err) {
+        throw new AuthenticationError(
+          "Your are not the owner of this post,hence cannot delete it"
+        );
+      }
+    },
   },
 };
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req }) => ({ req }),
 });
 const app = express();
 apolloServer.applyMiddleware({ app });
