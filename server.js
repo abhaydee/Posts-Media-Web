@@ -267,6 +267,30 @@ const resolvers = {
         });
       }
     },
+    likePost: async function (parent, { postId }, context) {
+      const { username } = checkAuth(context);
+      const post = await postModel.findById(postId);
+      if (post) {
+        if (post.likes.find((like) => like.username === username)) {
+          post.likes = post.likes.filter((like) => {
+            return like.username !== username;
+          });
+        } else {
+          post.likes.push({
+            username,
+            createdAt: new Date().toISOString(),
+          });
+        }
+        await post.save();
+        return post;
+      } else {
+        throw new UserInputError("Post not found", {
+          errors: {
+            body: "Post not found:- Please add new posts",
+          },
+        });
+      }
+    },
   },
 };
 const apolloServer = new ApolloServer({
