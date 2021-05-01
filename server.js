@@ -19,7 +19,6 @@ const Posts = require("./src/models/Posts");
 const checkAuth = require("./src/utils/authcheck");
 require("dotenv").config;
 const generateToken = async (user) => {
-  console.log("sending the user", user);
   return await jwt.sign(
     {
       username: user.username,
@@ -36,9 +35,22 @@ const typeDefs = gql`
     body: String!
     createdAt: String!
     username: String!
+    comments: [comments]!
+    likes: [likes]!
+  }
+  type comments {
+    id: ID!
+    body: String!
+    username: String!
+    createdAt: String!
+  }
+  type likes {
+    id: ID!
+    username: String!
+    createdAt: String!
   }
   type Query {
-    getPosts: [Post]
+    getPosts: [Post!]
     getPost(postId: ID!): Post!
   }
   input RegisterInput {
@@ -63,6 +75,9 @@ const typeDefs = gql`
     login(input: LoginInput): User
     createPost(body: String!): Post
     deletePost(postId: ID!): String!
+    createComment(postId: ID!, body: String): Post!
+    deleteComment(postId: ID!, commentId: String): Post!
+    likePost(postId: ID!): Post!
   }
 `;
 let users = [];
@@ -71,7 +86,6 @@ const resolvers = {
     getPosts: async function () {
       try {
         const posts = await postModel.find().sort({ createdAt: -1 });
-        console.log("the posts", posts);
         return posts;
       } catch (error) {
         throw new Error(error);
@@ -81,7 +95,6 @@ const resolvers = {
       try {
         const post = await postModel.findById(postId);
         if (post) {
-          console.log("the post", postId);
           return post;
         } else {
           return "Post not found";
@@ -104,7 +117,6 @@ const resolvers = {
         password,
         confirmPassword
       );
-      console.log("the fourth console", email);
       if (!valid) {
         throw new UserInputError("errors", { errors: errors });
       }
@@ -150,7 +162,6 @@ const resolvers = {
       context,
       info
     ) {
-      console.log("args", email, password);
       const { errors, valid } = loginValidation(email, password);
       if (!valid) {
         throw new UserInputError("errors", { errors: errors });
@@ -165,7 +176,6 @@ const resolvers = {
         throw new UserInputError("Wrong credentials", { errors: errors });
       }
       const token = generateToken(userdata);
-      console.log("the token", token);
       return {
         ...userdata._doc,
         id: userdata._id,
@@ -205,6 +215,56 @@ const resolvers = {
         }
       } catch (err) {
         throw new Error(err);
+      }
+    },
+    createComment: async function (parent, { postId, body }, context) {
+      const { username } = checkAuth(context);
+      if (body.trim === "") {
+        return new UserInputError("Empty comment", {
+          errors: {
+            body: "comment body cannot be empty",
+          },
+        });
+      }
+      const post = await postModel.findById(postId);
+      console.log("-----the post returning----", post);
+      if (post) {
+        post.comments.unshift({
+          body,
+          username,
+          createdAt: new Date().toISOString(),
+        });
+        await post.save();
+        return post;
+      } else {
+        throw new UserInputError("post does not exist", {
+          errors: {
+            body:
+              "posts does not exist , Please create one and perform operations",
+          },
+        });
+      }
+    },
+    deleteComment: async function (parent, { postId, commentId }, context) {
+      const { username } = checkAuth(context);
+      const post = await postModel.findById(postId);
+      if (post) {
+        const commentIndex = post.comments.findIndex(
+          (item) => item.id === commentId
+        );
+        if ((post.comments[commentIndex].username = username)) {
+          post.comments.splice(commentIndex, 1);
+          await post.save();
+          return post;
+        } else {
+          throw new AuthenticationError("Action not allowed");
+        }
+      } else {
+        throw new UserInputError("post does not exist", {
+          errors: {
+            body: "Post does not exist,hence cannot delete the comments",
+          },
+        });
       }
     },
   },
