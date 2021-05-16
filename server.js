@@ -308,7 +308,7 @@ app.get("/rest", (req, res) => {
 mongoose
   .connect(MONGODB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    app.listen(process.env.PORT || "3000", () => {
-      console.log(`server is running at PORT 3000 and database is connected`);
+    app.listen(process.env.PORT || "8000", () => {
+      console.log(`server is running at PORT 8000 and database is connected`);
     });
   });
