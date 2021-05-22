@@ -1,22 +1,28 @@
 import React, { useState } from "react";
 import { Button, Form } from "semantic-ui-react";
 import { gql, useMutation } from "@apollo/client";
+import { useForm } from "../utils/customhook";
 function Register(props) {
-  const [values, setValue] = useState({
+  // const [values, setValue] = useState({
+  //   username: "",
+  //   email: "",
+  //   password: "",
+  //   confirmPassword: "",
+  // });
+  const [errors, setErrors] = useState({});
+  console.log("the errors", errors);
+  // const handleChange = (event) => {
+  //   setValue({
+  //     ...values,
+  //     [event.target.name]: event.target.value,
+  //   });
+  // };
+  const { handleChange, values, onSubmit } = useForm(handleSubmit, {
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-  const [errors, setErrors] = useState({});
-  console.log("the errors", errors);
-  const handleChange = (event) => {
-    setValue({
-      ...values,
-      [event.target.name]: event.target.value,
-    });
-  };
-
   console.log("the values passed", values);
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
     update(_, result) {
@@ -28,16 +34,18 @@ function Register(props) {
     },
     variables: values,
   });
-  const handleSubmit = () => {
+
+  function handleSubmit() {
     addUser();
-  };
+  }
+
   return (
     <div>
       <Form
         onSubmit={handleSubmit}
         className={`form-container ${loading ? "loading" : ""}`}
       >
-        <h1>Register Input</h1>
+        <h1 className="header">Register Input</h1>
         <Form.Input
           label="Username"
           placeholder="Username"
