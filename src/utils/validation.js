@@ -30,10 +30,10 @@ const registerValidation = (email, username, password, confirmPassword) => {
   };
 };
 
-const loginValidation = (username, password) => {
+const loginValidation = (email, password) => {
   let errors = {};
-  if (username.trim() === "") {
-    errors.username = "username cannot be empty";
+  if (email.trim() === "") {
+    errors.username = "email cannot be empty";
   }
   if (password === "") {
     errors.password = "password cannot be empty";

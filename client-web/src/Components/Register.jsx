@@ -42,7 +42,7 @@ function Register(props) {
   return (
     <div>
       <Form
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
         className={`form-container ${loading ? "loading" : ""}`}
       >
         <h1 className="header">Register Input</h1>
