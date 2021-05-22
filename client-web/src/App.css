@@ -11,3 +11,8 @@
   width: 400px;
   margin: 0 auto;
 }
+
+.error-container {
+  width: 20rem !important;
+  margin: 2rem auto !important;
+}
