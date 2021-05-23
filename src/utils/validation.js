@@ -8,12 +8,6 @@ const registerValidation = (email, username, password, confirmPassword) => {
   if (email === "") {
     errors.email = "email cannot be empty";
   }
-  // else {
-  //   let regExpression = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  //   if (!email.match(regExpression)) {
-  //     errors.email = "Please use a valid email";
-  //   }
-  // }
   if (password === "") {
     errors.password = "Password cannot be empty";
   } else if (password !== confirmPassword) {
