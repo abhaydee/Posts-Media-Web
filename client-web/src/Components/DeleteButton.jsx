@@ -4,28 +4,36 @@ import React, { useState } from "react";
 import { Button, Icon, Confirm } from "semantic-ui-react";
 import { FETCH_POSTS } from "./Home";
 
-function DeleteButton({ postId, deleteCallback, history }) {
+function DeleteButton({ postId, deleteCallback }) {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [deletePost, { loading }] = useMutation(DELETE_MUTATION, {
     variables: {
       postId,
     },
-    update(proxy, result) {
+    update(proxy) {
       setConfirmOpen(false);
-      if (deleteCallback) {
-        history.push("/");
+      const { data } = proxy.readQuery({
+        query: FETCH_POSTS,
+      });
+      console.log("the data", data);
+      let tempData;
+      if (data) {
+        tempData = data && data;
+        console.log("the tempdata", tempData);
+        tempData.getPosts = tempData?.getPosts.filter(
+          (post) => post.id !== postId
+        );
       }
-      //   const data = proxy.readQuery({
-      //     query: FETCH_POSTS,
-      //   });
-      //   console.log("the data", data);
-      //   let tempData = data;
-      //   tempData.getPosts = tempData.getPosts((post) => post.id !== postId);
-      //   proxy.writeQuery({
-      //     query: FETCH_POSTS,
-      //     tempData,
-      //   });
-      //   callback();
+      proxy.writeQuery({
+        query: FETCH_POSTS,
+        data: {
+          ...tempData,
+          getPosts: {
+            tempData,
+          },
+        },
+      });
+      deleteCallback();
     },
   });
   return (

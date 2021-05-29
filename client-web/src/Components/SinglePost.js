@@ -16,9 +16,10 @@ function SinglePost(props) {
       postId,
     },
   });
+  console.log("the data", data);
   const deletePostCallback = () => {
     console.log("arriving after delete");
-    // props.history.push("/");
+    props.history.push("/");
   };
   let PostMarkup;
   if (!data?.getPost) {
