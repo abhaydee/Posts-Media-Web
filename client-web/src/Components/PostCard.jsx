@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, Icon, Image, Label } from "semantic-ui-react";
 import { AuthContext } from "../utils/context";
+import DeleteButton from "./DeleteButton";
 import LikeButton from "./LikeButton";
 function PostCard({
   post: { body, createdAt, id, username, likes, comments },
@@ -44,11 +45,7 @@ function PostCard({
             0
           </Label>
         </Button>
-        {user && user.username === username && (
-          <Button as="div" color="red" floated="right" onClick={handleDelete}>
-            <Icon name="trash" style={{ margin: 0 }} />
-          </Button>
-        )}
+        {user && user.username === username && <DeleteButton postId={id} />}
       </Card.Content>
     </Card>
   );
