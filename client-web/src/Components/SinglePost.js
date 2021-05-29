@@ -6,7 +6,7 @@ import { Card, Grid, Image, Button, Icon, Label } from "semantic-ui-react";
 import { AuthContext } from "../utils/context";
 import DeleteButton from "./DeleteButton";
 import LikeButton from "./LikeButton";
-
+import Avatar from "../images/avatar.jpg";
 function SinglePost(props) {
   const postId = props.match.params.postId;
   console.log("the post id", postId);
@@ -26,14 +26,10 @@ function SinglePost(props) {
   } else {
     const { id, body, createdAt, username, comments, likes } = data?.getPost;
     PostMarkup = (
-      <Grid>
+      <Grid style={{ margin: 20 }}>
         <Grid.Row>
           <Grid.Column width={2}>
-            <Image
-              floated="right"
-              size="small"
-              src="https://react.semantic-ui.com/images/avatar/large/molly.png"
-            />
+            <Image floated="right" size="small" src={Avatar} />
           </Grid.Column>
           <Grid.Column width={10}>
             <Card fluid>

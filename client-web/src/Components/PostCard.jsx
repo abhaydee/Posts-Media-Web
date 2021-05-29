@@ -5,6 +5,7 @@ import { Button, Card, Icon, Image, Label } from "semantic-ui-react";
 import { AuthContext } from "../utils/context";
 import DeleteButton from "./DeleteButton";
 import LikeButton from "./LikeButton";
+import Avatar from "../images/avatar.jpg";
 function PostCard({
   post: { body, createdAt, id, username, likes, comments },
 }) {
@@ -19,11 +20,7 @@ function PostCard({
   return (
     <Card fluid>
       <Card.Content>
-        <Image
-          floated="right"
-          size="mini"
-          src="https://react.semantic-ui.com/images/avatar/large/molly.png"
-        />
+        <Image floated="right" size="small" src={Avatar} />
         <Card.Header>{username}</Card.Header>
         <Card.Meta as={Link} to={`/posts/${id}`}>
           {moment(createdAt).fromNow(true)}
