@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { Button, Icon, Confirm } from "semantic-ui-react";
 
 function DeleteButton({ postId }) {
-  const handleDelete = () => {};
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [deletePost, { loading }] = useMutation(DELETE_MUTATION, {
     variables: {
