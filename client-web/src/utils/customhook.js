@@ -13,7 +13,6 @@ export const useForm = (callback, initialState = {}) => {
     event.preventDefault();
     callback();
   };
-  console.log("returning the values", values);
   return {
     handleChange,
     values,

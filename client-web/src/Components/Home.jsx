@@ -36,7 +36,7 @@ function Home() {
     </Grid>
   );
 }
-const FETCH_POSTS = gql`
+export const FETCH_POSTS = gql`
   {
     getPosts {
       id

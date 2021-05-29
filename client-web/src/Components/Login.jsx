@@ -6,19 +6,17 @@ import { AuthContext } from "../utils/context";
 function Login(props) {
   const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
-  console.log("the errors", errors);
   const { handleChange, values, onSubmit } = useForm(handleSubmit, {
     email: "",
     password: "",
   });
-  console.log("the values passed", values);
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(_, result) {
-      console.log("the result", result);
       context.login(result.data.login);
       props.history.push("/");
     },
     onError(err) {
+      console.log("-----errors----", err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,

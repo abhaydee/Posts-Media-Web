@@ -32,6 +32,7 @@ const loginValidation = (email, password) => {
   if (password === "") {
     errors.password = "password cannot be empty";
   }
+  console.log("the errors returning", errors);
   return {
     errors,
     valid: Object.keys(errors).length > 0 ? false : true,
