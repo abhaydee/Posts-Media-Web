@@ -9,22 +9,22 @@ import LikeButton from "./LikeButton";
 
 function SinglePost(props) {
   const postId = props.match.params.postId;
+  console.log("the post id", postId);
   const { user } = useContext(AuthContext);
-  const {
-    data: { getPost },
-  } = useQuery(FETCH_SINGLE_POST, {
+  const { data } = useQuery(FETCH_SINGLE_POST, {
     variables: {
       postId,
     },
   });
   const deletePostCallback = () => {
-    props.history.push("/");
+    console.log("arriving after delete");
+    // props.history.push("/");
   };
   let PostMarkup;
-  if (!getPost) {
+  if (!data?.getPost) {
     PostMarkup = <div>Loading Post....</div>;
   } else {
-    const { id, body, createdAt, username, comments, likes } = getPost;
+    const { id, body, createdAt, username, comments, likes } = data?.getPost;
     PostMarkup = (
       <Grid>
         <Grid.Row>
@@ -56,7 +56,10 @@ function SinglePost(props) {
                   0
                 </Label>
                 {user && user.username === username && (
-                  <DeleteButton postId={id} callback={deletePostCallback} />
+                  <DeleteButton
+                    postId={id}
+                    deleteCallback={deletePostCallback}
+                  />
                 )}
               </Card.Content>
             </Card>
