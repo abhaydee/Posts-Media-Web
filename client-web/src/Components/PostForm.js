@@ -51,7 +51,7 @@ function PostForm() {
         </Form.Field>
       </Form>
       {values.body.trim() === "" && (
-        <div className="ui error message">
+        <div className="ui error message" style={{ marginBottom: 20 }}>
           <ul className="list">
             <li>Post Body cannot be empty</li>
           </ul>

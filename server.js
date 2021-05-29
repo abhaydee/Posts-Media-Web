@@ -188,24 +188,16 @@ const resolvers = {
     createPost: async function (parent, { body }, context) {
       console.log("createpost", body);
       const authResult = checkAuth(context);
-      if (body.trim() === "") {
-        throw new UserInputError("empty post body", {
-          errors: {
-            message: "Post cannot be empty",
-          },
-        });
-      } else {
-        const newPost = new Posts({
-          body,
-          user: authResult.id,
-          username: authResult.username,
-          createdAt: new Date().toISOString(),
-        });
-        const post = newPost.save();
-        console.log("---the authresults---", authResult);
-        console.log("---post---", post);
-        return post;
-      }
+      const newPost = new Posts({
+        body,
+        user: authResult.id,
+        username: authResult.username,
+        createdAt: new Date().toISOString(),
+      });
+      const post = newPost.save();
+      console.log("---the authresults---", authResult);
+      console.log("---post---", post);
+      return post;
     },
     deletePost: async function (parent, { postId }, context) {
       try {
@@ -277,6 +269,8 @@ const resolvers = {
         });
       }
     },
+    // if the likes array has a username , then post is already liked.
+    //if the likes array does not have an username , then post is not yet likes
     likePost: async function (parent, { postId }, context) {
       const { username } = checkAuth(context);
       const post = await postModel.findById(postId);
