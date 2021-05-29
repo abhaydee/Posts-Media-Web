@@ -17,7 +17,9 @@ function SinglePost(props) {
       postId,
     },
   });
-
+  const deletePostCallback = () => {
+    props.history.push("/");
+  };
   let PostMarkup;
   if (!getPost) {
     PostMarkup = <div>Loading Post....</div>;
@@ -54,7 +56,7 @@ function SinglePost(props) {
                   0
                 </Label>
                 {user && user.username === username && (
-                  <DeleteButton postId={id} />
+                  <DeleteButton postId={id} callback={deletePostCallback} />
                 )}
               </Card.Content>
             </Card>
