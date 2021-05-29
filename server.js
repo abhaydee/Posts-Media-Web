@@ -17,6 +17,7 @@ const {
 } = require("./src/utils/validation");
 const Posts = require("./src/models/Posts");
 const checkAuth = require("./src/utils/authcheck");
+const e = require("express");
 require("dotenv").config;
 const generateToken = async (user) => {
   return await jwt.sign(
@@ -84,6 +85,7 @@ let users = [];
 const resolvers = {
   Query: {
     getPosts: async function () {
+      console.log("get all posts");
       try {
         const posts = await postModel.find().sort({ createdAt: -1 });
         return posts;
@@ -92,6 +94,7 @@ const resolvers = {
       }
     },
     getPost: async function (_, { postId }) {
+      console.log("getpost");
       try {
         const post = await postModel.findById(postId);
         if (post) {
@@ -183,18 +186,26 @@ const resolvers = {
       };
     },
     createPost: async function (parent, { body }, context) {
-      console.log("the body", body);
+      console.log("createpost", body);
       const authResult = checkAuth(context);
-      const newPost = new Posts({
-        body,
-        user: authResult.id,
-        username: authResult.username,
-        createdAt: new Date().toISOString(),
-      });
-      const post = newPost.save();
-      console.log("---the authresults---", authResult);
-      console.log("---post---", post);
-      return post;
+      if (body.trim() === "") {
+        throw new UserInputError("empty post body", {
+          errors: {
+            message: "Post cannot be empty",
+          },
+        });
+      } else {
+        const newPost = new Posts({
+          body,
+          user: authResult.id,
+          username: authResult.username,
+          createdAt: new Date().toISOString(),
+        });
+        const post = newPost.save();
+        console.log("---the authresults---", authResult);
+        console.log("---post---", post);
+        return post;
+      }
     },
     deletePost: async function (parent, { postId }, context) {
       try {
@@ -239,8 +250,7 @@ const resolvers = {
       } else {
         throw new UserInputError("post does not exist", {
           errors: {
-            body:
-              "posts does not exist , Please create one and perform operations",
+            body: "posts does not exist , Please create one and perform operations",
           },
         });
       }

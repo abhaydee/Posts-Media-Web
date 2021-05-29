@@ -33,21 +33,31 @@ function PostForm() {
   }
 
   return (
-    <Form onSubmit={onSubmit}>
-      <h2>Create a post:</h2>
-      <Form.Field>
-        <Form.Input
-          placeholder="Hi World!"
-          name="body"
-          onChange={handleChange}
-          value={values.body}
-          autoComplete="off"
-        />
-        <Button color="teal" type="submit">
-          Submit
-        </Button>
-      </Form.Field>
-    </Form>
+    <>
+      <Form onSubmit={onSubmit}>
+        <h2>Create a post:</h2>
+        <Form.Field>
+          <Form.Input
+            placeholder="Hi World!"
+            name="body"
+            onChange={handleChange}
+            value={values.body}
+            autoComplete="off"
+            error={values.body.trim() === "" ? true : false}
+          />
+          <Button color="teal" type="submit">
+            Submit
+          </Button>
+        </Form.Field>
+      </Form>
+      {values.body.trim() === "" && (
+        <div className="ui error message">
+          <ul className="list">
+            <li>Post Body cannot be empty</li>
+          </ul>
+        </div>
+      )}
+    </>
   );
 }
 
