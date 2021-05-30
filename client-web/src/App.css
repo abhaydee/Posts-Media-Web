@@ -28,4 +28,7 @@
   .custom-image {
     margin-bottom: 2rem;
   }
+  .custom-button {
+    width: 100%;
+  }
 }

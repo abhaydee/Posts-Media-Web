@@ -77,7 +77,7 @@ function Register(props) {
           error={errors.confirmPassword ? true : false}
           onChange={handleChange}
         ></Form.Input>
-        <Button primary type="submit">
+        <Button primary type="submit" className="custom-button">
           Register
         </Button>
       </Form>

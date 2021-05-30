@@ -53,7 +53,7 @@ function Login(props) {
           name="password"
           onChange={handleChange}
         ></Form.Input>
-        <Button primary type="submit">
+        <Button primary type="submit" className="custom-button">
           Login
         </Button>
       </Form>
