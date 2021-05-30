@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useQuery, gql } from "@apollo/client";
-import { Grid, Image } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import PostCard from "./PostCard";
 import { AuthContext } from "../utils/context";
 import PostForm from "./PostForm";

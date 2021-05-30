@@ -8,7 +8,7 @@ function PostForm() {
   const { handleChange, values, onSubmit } = useForm(createPostCallback, {
     body: "",
   });
-  const [addPost, { error }] = useMutation(ADD_POST_MUTATION, {
+  const [addPost] = useMutation(ADD_POST_MUTATION, {
     variables: values,
     update(proxy, result) {
       const data = proxy.readQuery({

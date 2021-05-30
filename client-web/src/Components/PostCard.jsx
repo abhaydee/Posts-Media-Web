@@ -1,7 +1,7 @@
 import moment from "moment";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Button, Card, Icon, Image, Label, Popup } from "semantic-ui-react";
+import { Button, Card, Icon, Image, Label } from "semantic-ui-react";
 import { AuthContext } from "../utils/context";
 import DeleteButton from "./DeleteButton";
 import LikeButton from "./LikeButton";
@@ -10,13 +10,6 @@ import MyPopup from "./MyPopup";
 function PostCard({
   post: { body, createdAt, id, username, likes, comments },
 }) {
-  const handleComment = () => {
-    console.log("the comment");
-  };
-  const handleLike = () => {
-    console.log("the like");
-  };
-  const handleDelete = () => {};
   const { user } = useContext(AuthContext);
   return (
     <Card fluid>
@@ -31,12 +24,7 @@ function PostCard({
       <Card.Content extra>
         <LikeButton user={user} post={{ id, likes, username }} />
         <MyPopup content="Comment on Post..">
-          <Button
-            as={Link}
-            to={`/posts/${id}`}
-            labelPosition="right"
-            onClick={handleComment}
-          >
+          <Button as={Link} to={`/posts/${id}`} labelPosition="right">
             <Button color="teal" basic>
               <Icon name="comments" />
             </Button>
