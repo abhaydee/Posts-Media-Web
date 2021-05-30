@@ -38,6 +38,7 @@ function LikeButton({ post: { id, likes, username }, user }) {
     <>
       <Popup
         content="Like on Post..."
+        inverted
         trigger={
           <Button as="div" labelPosition="right" onClick={likePost}>
             {likeButton}
