@@ -6,6 +6,7 @@ import { AuthContext } from "../utils/context";
 import DeleteButton from "./DeleteButton";
 import LikeButton from "./LikeButton";
 import Avatar from "../images/avatar.jpg";
+import MyPopup from "./MyPopup";
 function PostCard({
   post: { body, createdAt, id, username, likes, comments },
 }) {
@@ -29,25 +30,21 @@ function PostCard({
       </Card.Content>
       <Card.Content extra>
         <LikeButton user={user} post={{ id, likes, username }} />
-        <Popup
-          content="Comment on Post.."
-          inverted
-          trigger={
-            <Button
-              as={Link}
-              to={`/posts/${id}`}
-              labelPosition="right"
-              onClick={handleComment}
-            >
-              <Button color="teal" basic>
-                <Icon name="comments" />
-              </Button>
-              <Label as="a" basic color="teal" pointing="left">
-                0
-              </Label>
+        <MyPopup content="Comment on Post..">
+          <Button
+            as={Link}
+            to={`/posts/${id}`}
+            labelPosition="right"
+            onClick={handleComment}
+          >
+            <Button color="teal" basic>
+              <Icon name="comments" />
             </Button>
-          }
-        />
+            <Label as="a" basic color="teal" pointing="left">
+              0
+            </Label>
+          </Button>
+        </MyPopup>
 
         {user && user.username === username && <DeleteButton postId={id} />}
       </Card.Content>

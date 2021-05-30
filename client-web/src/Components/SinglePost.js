@@ -15,6 +15,7 @@ import { AuthContext } from "../utils/context";
 import DeleteButton from "./DeleteButton";
 import LikeButton from "./LikeButton";
 import Avatar from "../images/avatar.jpg";
+import MyPopup from "./MyPopup";
 function SinglePost(props) {
   const postId = props.match.params.postId;
   console.log("the post id", postId);
@@ -61,13 +62,15 @@ function SinglePost(props) {
               <hr />
               <Card.Content extra>
                 <LikeButton user={user} post={{ id, likes, username }} />
-                <Button
-                  color="teal"
-                  basic
-                  onClick={() => console.log("comment on post")}
-                >
-                  <Icon name="comments" />
-                </Button>
+                <MyPopup content="Comment on Post...">
+                  <Button
+                    color="teal"
+                    basic
+                    onClick={() => console.log("comment on post")}
+                  >
+                    <Icon name="comments" />
+                  </Button>
+                </MyPopup>
                 <Label as="a" basic color="teal" pointing="left">
                   0
                 </Label>
