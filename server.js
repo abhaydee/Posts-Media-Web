@@ -17,7 +17,6 @@ const {
 } = require("./src/utils/validation");
 const Posts = require("./src/models/Posts");
 const checkAuth = require("./src/utils/authcheck");
-if (process.env.NODE_ENV !== "production") require("dotenv").config();
 const generateToken = async (user) => {
   return await jwt.sign(
     {
