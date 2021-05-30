@@ -17,7 +17,6 @@ const {
 } = require("./src/utils/validation");
 const Posts = require("./src/models/Posts");
 const checkAuth = require("./src/utils/authcheck");
-const e = require("express");
 require("dotenv").config;
 const generateToken = async (user) => {
   return await jwt.sign(
@@ -315,4 +314,7 @@ mongoose
     app.listen(process.env.PORT || "8000", () => {
       console.log(`server is running at PORT 8000 and database is connected`);
     });
+  })
+  .catch((err) => {
+    console.log("database could not be connected", err);
   });

@@ -49,10 +49,10 @@ function SinglePost(props) {
     PostMarkup = (
       <Grid style={{ margin: 20 }}>
         <Grid.Row>
-          <Grid.Column width={2}>
-            <Image floated="right" size="small" src={Avatar} />
+          <Grid.Column mobile={16} largeScreen={4}>
+            <Image centered src={Avatar} className="custom-image" />
           </Grid.Column>
-          <Grid.Column width={10}>
+          <Grid.Column largeScreen={8} mobile={16}>
             <Card fluid>
               <Card.Content>
                 <Card.Header>{username}</Card.Header>

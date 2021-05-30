@@ -35,7 +35,7 @@ function PostForm() {
   return (
     <>
       <Form onSubmit={onSubmit}>
-        <h2>Create a post:</h2>
+        <h2 className="post-header">Create a post:</h2>
         <Form.Field>
           <Form.Input
             placeholder="Hi World!"
@@ -44,8 +44,9 @@ function PostForm() {
             value={values.body}
             autoComplete="off"
             error={values.body.trim() === "" ? true : false}
+            className="form-input"
           />
-          <Button color="teal" type="submit">
+          <Button color="teal" type="submit" className="submit-button">
             Submit
           </Button>
         </Form.Field>

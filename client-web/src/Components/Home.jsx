@@ -20,7 +20,7 @@ function Home() {
       </Grid.Row>
       <Grid.Row>
         {user && (
-          <Grid.Column>
+          <Grid.Column mobile="16" largeScreen="5">
             <PostForm />
           </Grid.Column>
         )}
@@ -30,7 +30,12 @@ function Home() {
           <TransitionGroup>
             {postData &&
               postData.map((post) => (
-                <Grid.Column key={post.id} style={{ marginBottom: 20 }}>
+                <Grid.Column
+                  key={post.id}
+                  style={{ marginBottom: 20 }}
+                  mobile="16"
+                  computer="5"
+                >
                   <PostCard post={post} />
                 </Grid.Column>
               ))}

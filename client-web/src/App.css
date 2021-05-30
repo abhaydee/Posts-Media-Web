@@ -20,3 +20,12 @@
 .header {
   margin-top: 1rem !important;
 }
+
+@media screen and (max-width: 768px) {
+  .post-header {
+    text-align: center;
+  }
+  .custom-image {
+    margin-bottom: 2rem;
+  }
+}
