@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+}
+.page-title {
+  display: block !important;
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 10px;
+}
+.form-container {
+  width: 400px;
+  margin: 0 auto;
+}
+
+.error-container {
+  width: 20rem !important;
+  margin: 2rem auto !important;
+}
+
+.header {
+  margin-top: 1rem !important;
+}
+
+@media screen and (max-width: 768px) {
+  .post-header {
+    text-align: center;
+  }
+  .custom-image {
+    margin-bottom: 2rem;
+  }
+  .custom-button {
+    width: 100%;
+  }
+}
