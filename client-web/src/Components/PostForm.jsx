@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 import React from "react";
 import { Button, Form } from "semantic-ui-react";
 import { useForm } from "../utils/customhook";
-import { FETCH_POSTS } from "../Components/Home";
+import { FETCH_POSTS } from "./Home";
 function PostForm() {
   const { handleChange, values, onSubmit } = useForm(createPostCallback, {
     body: "",

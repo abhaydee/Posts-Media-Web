@@ -7,7 +7,7 @@ import Home from "./Components/Home";
 import Login from "./Components/Login";
 import MenuBar from "./Components/Menubar";
 import Register from "./Components/Register";
-import SinglePost from "./Components/SinglePost";
+import SinglePost from "./Components/SinglePost.jsx";
 import { AuthProvider } from "./utils/context";
 function App() {
   return (

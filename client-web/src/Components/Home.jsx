@@ -3,7 +3,7 @@ import { useQuery, gql } from "@apollo/client";
 import { Grid } from "semantic-ui-react";
 import PostCard from "./PostCard";
 import { AuthContext } from "../utils/context";
-import PostForm from "./PostForm";
+import PostForm from "./PostForm.jsx";
 import { TransitionGroup } from "semantic-ui-react";
 
 function Home() {
