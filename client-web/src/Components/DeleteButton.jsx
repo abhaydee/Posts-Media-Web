@@ -92,4 +92,5 @@ const DELETE_COMMENT = gql`
     }
   }
 `;
+
 export default DeleteButton;
