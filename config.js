@@ -1,5 +1,6 @@
+require("dotenv").config();
+
 module.exports = {
-  MONGODB:
-    "mongodb+srv://abhaydee:hpau003tx@test-cluster.qcll2.mongodb.net/merng?retryWrites=true&w=majority",
-  secretKey: "some-secret-key",
+  MONGODB: process.env.mongodbUrl,
+  secretKey: process.env.secretKeyToken,
 };
