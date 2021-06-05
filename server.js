@@ -301,6 +301,8 @@ const apolloServer = new ApolloServer({
   context: ({ req }) => ({ req }),
 });
 const app = express();
+const cors = require("cors");
+app.use(cors());
 apolloServer.applyMiddleware({ app });
 app.get("/rest", (req, res) => {
   res.json({
