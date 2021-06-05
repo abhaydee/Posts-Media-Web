@@ -11,6 +11,9 @@ import {
 import { setContext } from "@apollo/client/link/context";
 const httpLink = createHttpLink({
   uri: "https://shrouded-refuge-55173.herokuapp.com/graphql",
+  fetchOptions: {
+    mode: "no-cors",
+  },
 });
 const authorizationLink = setContext(({ _, headers }) => {
   const token = localStorage.getItem("jwtToken");
