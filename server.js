@@ -302,7 +302,7 @@ const apolloServer = new ApolloServer({
 });
 const app = express();
 const cors = require("cors");
-app.use(cors());
+app.use(cors({ origin: "http://localhost:8001", credentials: true }));
 apolloServer.applyMiddleware({ app });
 app.get("/rest", (req, res) => {
   res.json({
