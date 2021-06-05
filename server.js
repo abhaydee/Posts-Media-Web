@@ -302,7 +302,9 @@ const apolloServer = new ApolloServer({
 });
 const app = express();
 const cors = require("cors");
-app.use(cors({ origin: "http://localhost:8001", credentials: true }));
+app.use(
+  cors({ origin: "https://social-media-web.netlify.app", credentials: true })
+);
 apolloServer.applyMiddleware({ app });
 app.get("/rest", (req, res) => {
   res.json({
