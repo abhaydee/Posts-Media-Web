@@ -1,6 +1,6 @@
 const path = require("path");
-require("dotenv").config({ path: require("./env") });
+require("dotenv").config({ path: _dirname + ".env" });
 module.exports = {
-  MONGODB: process?.env?.mongodbUrl,
-  secretKey: process?.env?.secretKeyToken,
+  MONGODB: `mongodb+srv://${process.env.mongodbUsername}:${process.env.password}@test-cluster.qcll2.mongodb.net/merng?retryWrites=true&w=majority`,
+  secretKey: process.env.secretToken,
 };
