@@ -1,6 +1,6 @@
 const path = require("path");
-require("dotenv").config({ path: ".env" });
+require("dotenv").config({ path: require("./env") });
 module.exports = {
-  MONGODB: process.env.mongodbUrl,
-  secretKey: process.env.secretKeyToken,
+  MONGODB: process?.env?.mongodbUrl,
+  secretKey: process?.env?.secretKeyToken,
 };
