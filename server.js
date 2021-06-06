@@ -295,6 +295,7 @@ const resolvers = {
     },
   },
 };
+console.log("the errors", MONGODB);
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
