@@ -300,6 +300,8 @@ const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => ({ req }),
+  introspection: true,
+  playground: true,
 });
 const app = express();
 apolloServer.applyMiddleware({ app });
