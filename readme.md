@@ -2,13 +2,13 @@
 
 ## About the Project
 
-Social-Media-Web:- This Repository contains the code for the Full Stack Social Media Web . It has a secured login and registration system setup from scratch. The users are stored in the database. You can perform some of the basic boilerplate functionality that we use in the Social Media .
+Social-Media-Web:- This Repository contains the code for the Full Stack Social Media Web. It has a secured login and registration system setup from scratch. The users are stored in the database. You can perform some of the basic boilerplate functionality that we use daily use in Social Media.
 
 You can check the project live here:- [https://social-media-web.netlify.app](https://social-media-web.netlify.app/)
 
 ## 1. Pre-requisites
 
-    a)  Just have nodejs installed on your systems.  You can download and install it from here ([https://nodejs.org/en/](https://nodejs.org/en/)) . Preferred Versions (Version 14 and above)
+    a)  Just have nodejs installed on your systems.  You can download and install it from here ([https://nodejs.org/en/](https://nodejs.org/en/)). Preferred Versions (Version 14 and above)
 
     b) Install a package manager (NPM or YARN)
 
@@ -16,26 +16,26 @@ You can check the project live here:- [https://social-media-web.netlify.app](htt
 
     Clone the project from this repository  ( [https://github.com/abhaydee/Posts-Media-Web](https://github.com/abhaydee/Posts-Media-Web))
 
-      a) Checkout the front-end to access the code
+      a) Check out the front-end to access the code
       b) Go ahead and run the npm install to  install all the dependencies required for the Front-End Web App
-      c) Run npm start to run the client side frontend code
-      d) Currently , the apollo client is pointing to the live backend server which is hosted , you can switch it your local server depending upon your needs.
+      c) Run npm start to run the client-side frontend code
+      d) Currently, the apollo client is pointing to the live backend server which is hosted, you can switch it to your local server depending upon your needs.
 
-## 3. Back-End :-
+## 3. Back-End:-
 
-      a)  Checkout to the master to access the backend code
+      a) Checkout to the master to access the backend code
       b) Use the npm install to install all the dependencies required for the backend-servers
       c) Run npm start to run the backend server
 
 ## 4) MongoDb:-
 
-     a) I have currently used MongoDB Atlas . This is the simplest for all the newbies to start with.  ([https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas))
+     a) I have currently used MongoDB Atlas. This is the simplest for all the newbies to start with.  ([https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas))
 
      b) Create the collections based on the schema specified in the Backend code.
 
-     c) You should create a config.js file , to configure your mongodb connection urls and secret-keys
+     c) You should create a config.js file, to configure your MongoDB connection URLs and secret-keys
 
-     d) For steps to configure your Mongodb database , please refer to mongodb atlas documentation ([https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas))
+     d) For steps to configure your MongoDB database , please refer to MongoDB atlas documentation ([https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas))
 
 ## 5) Libraries and tools used for development
 
@@ -50,7 +50,7 @@ You can check the project live here:- [https://social-media-web.netlify.app](htt
 ## 6) State Management
 
      a) Global State Management for this App has been handled using React Context API and React Hooks. Check out React Context for the latest updates
-     b) I have used the Apollo In-Memory Cache to reduce the state mutations and management , since the Apollo In-Memory Cache has really good features that you can utilise to optimise the performance
+     b) I have used the Apollo In-Memory Cache to reduce the state mutations and management since the Apollo In-Memory Cache has really good features that you can utilize to optimise the performance
 
 ## 7) Cloud Deployment
 
