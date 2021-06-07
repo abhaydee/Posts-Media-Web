@@ -33,7 +33,7 @@ You can check the project live here:- [https://social-media-web.netlify.app](htt
 
      b) Create the collections based on the schema specified in the Backend code.
 
-     c) You should create a config.js file, to configure your MongoDB connection URLs and secret-keys
+     c) You should have  a config.js file, in which you can  configure your MongoDB connection URLs and secret-keys along with .env
 
      d) For steps to configure your MongoDB database , please refer to MongoDB atlas documentation ([https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas))
 
