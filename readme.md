@@ -4,7 +4,7 @@
 
 Social-Media-Web:- This Repository contains the code for the Full Stack Social Media Web. It has a secured login and registration system setup from scratch. The users are stored in the database. You can perform some of the basic boilerplate functionality that we use daily use in Social Media.
 
-You can check the project live here:- [https://social-media-web.netlify.app](https://social-media-web.netlify.app/)
+You can check the project live here:- https://social-media-web.vercel.app/
 
 ## 1. Pre-requisites
 
