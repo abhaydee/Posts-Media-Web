@@ -3,22 +3,20 @@ import { Button, Form } from "semantic-ui-react";
 import { gql, useMutation } from "@apollo/client";
 import { useForm } from "../utils/customhook";
 import { AuthContext } from "../utils/context";
+import { useHistory } from "react-router-dom";
 function Register(props) {
+  const history = useHistory();
   const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
-  console.log("the errors", errors);
   const { handleChange, values, onSubmit } = useForm(handleSubmit, {
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-  console.log("the values passed", values);
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
     update(_, result) {
-      console.log("the result", result);
-      context.login(result.data.login);
-      props.history.push("/");
+      history.push("/");
     },
     onError(err) {
       setErrors(err.graphQLErrors[0].extensions.exception.errors);

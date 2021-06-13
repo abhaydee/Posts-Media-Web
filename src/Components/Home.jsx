@@ -9,9 +9,6 @@ import { TransitionGroup } from "semantic-ui-react";
 function Home() {
   const { loading, data } = useQuery(FETCH_POSTS);
   const { user } = useContext(AuthContext);
-  if (data) {
-    console.log("returning the data", data);
-  }
   const postData = data && data?.getPosts;
   return (
     <Grid columns={3}>

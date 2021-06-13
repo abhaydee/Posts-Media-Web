@@ -18,7 +18,6 @@ import Avatar from "../images/avatar.jpg";
 import MyPopup from "./MyPopup";
 function SinglePost(props) {
   const postId = props.match.params.postId;
-  console.log("the post id", postId);
   const { user } = useContext(AuthContext);
   const [comment, setComment] = useState("");
   const commentInputRef = useRef(null);
@@ -38,7 +37,6 @@ function SinglePost(props) {
     },
   });
   const deletePostCallback = () => {
-    console.log("arriving after delete");
     props.history.push("/");
   };
   let PostMarkup;

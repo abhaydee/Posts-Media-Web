@@ -19,11 +19,9 @@ function DeleteButton({ postId, deleteCallback, commentId }) {
         const { data } = proxy.readQuery({
           query: FETCH_POSTS,
         });
-        console.log("the data", data);
         let tempData;
         if (data) {
           tempData = data && data;
-          console.log("the tempdata", tempData);
           tempData.getPosts = tempData?.getPosts.filter(
             (post) => post.id !== postId
           );

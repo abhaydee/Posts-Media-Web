@@ -20,7 +20,6 @@ const authorizationLink = setContext(({ _, headers }) => {
     },
   };
 });
-console.log("authorization link", authorizationLink.request);
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: authorizationLink.concat(httpLink),
