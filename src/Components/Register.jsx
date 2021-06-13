@@ -1,8 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Button, Form } from "semantic-ui-react";
 import { gql, useMutation } from "@apollo/client";
 import { useForm } from "../utils/customhook";
-import { AuthContext } from "../utils/context";
 import { useHistory } from "react-router-dom";
 function Register(props) {
   const history = useHistory();
