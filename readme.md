@@ -16,7 +16,7 @@ You can check the project live here:- [https://social-media-web.netlify.app](htt
 
     Clone the project from this repository  ( [https://github.com/abhaydee/Posts-Media-Web](https://github.com/abhaydee/Posts-Media-Web))
 
-      a) Check out the front-end to access the code
+      a) Check out the (front-end) branch  to access the code
       b) Go ahead and run the npm install to  install all the dependencies required for the Front-End Web App
       c) Run npm start to run the client-side frontend code
       d) Currently, the apollo client is pointing to the live backend server which is hosted, you can switch it to your local server depending upon your needs.
