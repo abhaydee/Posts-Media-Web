@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "semantic-ui-css/semantic.min.css";
 import { Container } from "semantic-ui-react";
 import "./App.css";
-import AuthRoute from "./Components/AuthRoute";
 import Home from "./Components/Home";
 import Login from "./Components/Login";
 import MenuBar from "./Components/Menubar";

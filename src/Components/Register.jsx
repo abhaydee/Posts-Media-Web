@@ -6,7 +6,6 @@ import { AuthContext } from "../utils/context";
 import { useHistory } from "react-router-dom";
 function Register(props) {
   const history = useHistory();
-  const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
   const { handleChange, values, onSubmit } = useForm(handleSubmit, {
     username: "",
