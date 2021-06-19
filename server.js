@@ -171,7 +171,7 @@ const resolvers = {
       if (!userdata) {
         throw new UserInputError("user not found");
       }
-      const match = bcrypt.compare(password, userModal.password);
+      const match = await bcrypt.compare(password, userdata.password);
       if (!match) {
         errors.general = "wrong credentials";
         throw new UserInputError("Wrong credentials", { errors: errors });
@@ -193,19 +193,12 @@ const resolvers = {
         createdAt: new Date().toISOString(),
       });
       const post = newPost.save();
-      console.log("---the authresults---", authResult);
-      console.log("---post---", post);
       return post;
     },
     deletePost: async function (parent, { postId }, context) {
       try {
         const authResult = checkAuth(context);
         const post = await Posts.findById(postId);
-        console.log(
-          "--authresult-username && post-username",
-          authResult.username,
-          post.username
-        );
         if (authResult.username === post.username) {
           await post.delete();
           return "Post deleted successfully";
@@ -228,7 +221,6 @@ const resolvers = {
         });
       }
       const post = await postModel.findById(postId);
-      console.log("-----the post returning----", post);
       if (post) {
         post.comments.unshift({
           body,
@@ -295,7 +287,6 @@ const resolvers = {
     },
   },
 };
-console.log("the errors", MONGODB);
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
